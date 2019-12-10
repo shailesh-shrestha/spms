@@ -2,8 +2,9 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
+
+@media (prefers-reduced-motion: no-preference) {
+
 }
 
 .App-header {
@@ -18,5 +19,5 @@
 }
 
 .App-link {
-  color: #09d3ac;
+  color: #61dafb;
 }
