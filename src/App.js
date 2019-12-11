@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
-import {Paper, Typography} from "@material-ui/core";
+import React, {Component, Fragment} from 'react';
+import { Typography} from "@material-ui/core";
 import './App.css';
 import Create from "./components/dialogs/Create";
 import Portfolios from "./components/Portfolios";
 
-
-export default class App extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -31,7 +30,7 @@ export default class App extends Component {
         if (localStorage["portfolios"] ) {
             const portfoliosLOCAL = localStorage["portfolios"];
             // If the current state is empty and local has some data
-            if (portfolios.length === 0) {
+            if (portfolios.length === 0 && typeof(JSON.parse(portfoliosLOCAL)) === "object") {
                 const portfolios = JSON.parse(portfoliosLOCAL);
                 if (portfolios !== "undefined") {
                     this.setState({
@@ -83,11 +82,12 @@ export default class App extends Component {
     render() {
         const portfolios = this.state.portfolios;
         return (
-            <Paper>
+            <Fragment>
                 <Typography variant="h2" align="center"> Portfolios </Typography>
-                <Portfolios portfolios={portfolios}/>
                 <Create onCreate={this.handlePortfolioCreate} portfolioMax={this.checkPortfolioMax}/>
-            </Paper>
+                <Portfolios portfolios={portfolios}/>
+            </Fragment>
         );
     }
 }
+export default App;

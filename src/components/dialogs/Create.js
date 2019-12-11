@@ -1,5 +1,4 @@
-import React, {Component, Fragment} from "react";
-
+import React, {Component} from "react";
 import {
     Fab,
     Button,
@@ -10,10 +9,24 @@ import {
     DialogContentText,
     DialogTitle
 } from "@material-ui/core";
-
 import AddIcon from "@material-ui/icons/Add";
+import {withStyles} from "@material-ui/styles";
 
-export default class Create extends Component {
+
+// Styling object for material-ui
+// Sends classes as a props.
+const useStyles = theme => ({
+    fav_root: {
+    position: 'relative',
+  },
+    fab: {
+    position: 'fixed',
+    bottom: '24px',
+    right: '24px',
+  },
+});
+
+class Create extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,16 +82,23 @@ export default class Create extends Component {
 
     render() {
         const {open, title, disable, message, maxReached} = this.state;
+        const {classes,} = this.props;
         return (
-            <Fragment>
-                <Fab color="primary" aria-label="add" onClick={this.handleToggle} disabled={maxReached}>
+            <div className={classes.fav_root}>
+                <Fab
+                    color="primary"
+                    aria-label="add"
+                    onClick={this.handleToggle}
+                    disabled={maxReached}
+                    className={classes.fab}
+                >
                     <AddIcon/>
                 </Fab>
 
                 <Dialog
                     open={open}
                     onClose={this.handleClose}
-                    aria-labelledby="form-dialog-title"
+                    // aria-labelledby="form-dialog-title"
                 >
                     <DialogTitle id="form-dialog-title">Create Portfolio</DialogTitle>
                     <DialogContent>
@@ -110,7 +130,9 @@ export default class Create extends Component {
                     </Button>
                     </DialogActions>
                 </Dialog>
-            </Fragment>
+            </div>
         );
     }
 }
+
+export default withStyles(useStyles)(Create);
