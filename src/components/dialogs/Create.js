@@ -15,16 +15,17 @@ import {withStyles} from "@material-ui/styles";
 
 // Styling object for material-ui
 // Sends classes as a props.
-const useStyles = theme => ({
+const useStyles = {
     fav_root: {
     position: 'relative',
   },
     fab: {
-    position: 'fixed',
-    bottom: '24px',
-    right: '24px',
+        position: 'fixed',
+        bottom: '24px',
+        right: '24px',
+        zIndex: 100,
   },
-});
+};
 
 class Create extends Component {
     constructor(props) {
@@ -116,7 +117,7 @@ class Create extends Component {
                     <DialogActions>
                         <Button
                             variant="contained"
-                            color="Secondary"
+                            color="secondary"
                             onClick={this.handleClose}
                         >
                             Cancel

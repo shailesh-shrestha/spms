@@ -25,6 +25,7 @@ class App extends Component {
     // Pull the data to current state if there is
     // check whether the 'portfolio' data item is stored in web Storage
     updateLocalStorage = (portfolios) => {
+        // alert("Updating" + portfolios.length);
         const portfoliosJSON = JSON.stringify(portfolios);
         // If the local storage has portfolios
         if (localStorage["portfolios"] ) {
@@ -32,11 +33,7 @@ class App extends Component {
             // If the current state is empty and local has some data
             if (portfolios.length === 0 && typeof(JSON.parse(portfoliosLOCAL)) === "object") {
                 const portfolios = JSON.parse(portfoliosLOCAL);
-                if (portfolios !== "undefined") {
-                    this.setState({
-                        portfolios: portfolios,
-                    });
-                }
+                this.updatePortfoliosState(portfolios);
             } else if (portfoliosLOCAL !== portfoliosJSON) {
                 // They are different change the local state to current state
                 localStorage.clear();
@@ -44,6 +41,15 @@ class App extends Component {
             }
         } else {
             localStorage.setItem("portfolios", portfoliosJSON);
+        }
+    };
+
+    // Update Portfolio state
+    updatePortfoliosState = (portfolios) => {
+        if (portfolios !== "undefined") {
+            this.setState({
+                portfolios: portfolios,
+            });
         }
     };
 
@@ -85,7 +91,7 @@ class App extends Component {
             <Fragment>
                 <Typography variant="h2" align="center"> Portfolios </Typography>
                 <Create onCreate={this.handlePortfolioCreate} portfolioMax={this.checkPortfolioMax}/>
-                <Portfolios portfolios={portfolios}/>
+                <Portfolios portfolios={portfolios} onUpdate={this.updatePortfoliosState}/>
             </Fragment>
         );
     }
