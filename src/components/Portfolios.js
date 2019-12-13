@@ -7,13 +7,13 @@ import Portfolio from "./Portfolio";
 // Styling object for material-ui
 // Sends classes as a props.
 const useStyles = {
-    portfolio_list: {
+    root: {
         flexGrow: 1,
+    },
+    portfolioList: {
+        padding: "12px",
         alignItems: "center",
         justifyContent: "center",
-    },
-    paper: {
-        padding: "12px",
     },
     portfolio: {
         alignContent: "center",
@@ -27,11 +27,17 @@ class Portfolios extends Component {
         this.state = {};
     }
 
+    // Removes the provided portfolio from the list.
     handleDeletePortfolio = (portfolio) => {
         const portfolios = this.props.portfolios;
-        alert("Portfolio.js  " + portfolio.id + "  Number" + portfolios.length);
         portfolios.splice(portfolios.indexOf(portfolio), 1);
-        alert("Portfolio.js Delete " + portfolio.id + "  Number" + portfolios.length);
+        this.props.onUpdate(portfolios);
+    };
+
+    // Receives a portfolio as property and updates the current list of portfolio with the provided one.
+    handleUpdatePortfolio = (portfolio) => {
+        const portfolios = this.props.portfolios;
+        portfolios[portfolios.indexOf(portfolio)] = portfolio;
         this.props.onUpdate(portfolios);
     };
 
@@ -39,13 +45,19 @@ class Portfolios extends Component {
         const {portfolios, classes} = this.props;
         const portfolioList = portfolios.map((portfolio) =>
             <Grid item xs={12} sm={12} md={10} lg={6} key={portfolio.id} id={portfolio.id} className={classes.portfolio}>
-                <Portfolio portfolio={portfolio} onDelete={this.handleDeletePortfolio}/>
+                <Portfolio
+                    portfolio={portfolio}
+                    onDelete={this.handleDeletePortfolio}
+                    onUpdate={this.handleUpdatePortfolio}
+                />
             </Grid>
         );
         return (
-            <Grid container className={classes.portfolio_list}>
-                {portfolioList}
-            </Grid>
+            <div className={classes.root}>
+                <Grid container className={classes.portfolioList}>
+                    {portfolioList}
+                </Grid>
+            </div>
         )
     }
 }

@@ -19,6 +19,9 @@ class App extends Component {
         // Update Local Storage
         this.updateLocalStorage(this.state.portfolios);
     }
+    componentWillUnmount() {
+
+    }
 
     // Update local storage and current state
     // Check if there is data in local storage
@@ -46,10 +49,17 @@ class App extends Component {
 
     // Update Portfolio state
     updatePortfoliosState = (portfolios) => {
-        if (portfolios !== "undefined") {
+        if (portfolios.length === 0) {
+            localStorage.clear();
             this.setState({
                 portfolios: portfolios,
             });
+        } else {
+            this.setState({
+                portfolios: portfolios,
+            });
+            // Update the local Storage with
+            this.updateLocalStorage(portfolios);
         }
     };
 
@@ -76,6 +86,7 @@ class App extends Component {
                     {
                         id: this.state.portfolios.length + 1,
                         title: title,
+                        stocks: []
                     }];
             this.setState({
                 portfolios: portfolios

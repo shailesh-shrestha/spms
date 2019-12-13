@@ -16,7 +16,7 @@ import {withStyles} from "@material-ui/styles";
 // Styling object for material-ui
 // Sends classes as a props.
 const useStyles = {
-    fav_root: {
+    root: {
     position: 'relative',
   },
     fab: {
@@ -85,7 +85,7 @@ class Create extends Component {
         const {open, title, disable, message, maxReached} = this.state;
         const {classes,} = this.props;
         return (
-            <div className={classes.fav_root}>
+            <div className={classes.root}>
                 <Fab
                     color="primary"
                     aria-label="add"
