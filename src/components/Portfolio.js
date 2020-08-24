@@ -1,7 +1,9 @@
 import React, {Component, forwardRef} from "react";
 import MaterialTable from "material-table";
-
+// import dateFnsFormat from 'date-fns/format';
+// import dateFnsParse from 'date-fns/parse';
 import {makeStyles, withStyles} from "@material-ui/styles";
+// import {Paper} from "@material-ui/core";
 import {
     AddBox,
     ArrowDownward,
@@ -26,6 +28,8 @@ const useStyles = makeStyles(theme => ({
     root: {
         padding: '12px',
         '& .MuiTextField-root': {
+      // margin: theme.spacing(1),
+      // width: 200,
             color: 'primary',
     },
     },
