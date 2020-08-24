@@ -28,8 +28,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         padding: '12px',
         '& .MuiTextField-root': {
-      // margin: theme.spacing(1),
-      // width: 200,
             color: 'primary',
     },
     },
